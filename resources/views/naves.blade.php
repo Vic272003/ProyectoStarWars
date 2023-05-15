@@ -12,7 +12,8 @@
 </head>
 
 <body>
-    <a class="volver btn btn-warning btn-lg" href="/">Volver</a>
+    <a class="volver btn btn-warning btn-lg" href="/">Inicio</a>
+    <a class="siguiente btn btn-warning btn-lg" href="/pilots">Pilotos</a>
     <div id="naves">
         <div ng-controller="starshipCtrl">
 
@@ -20,7 +21,7 @@
             <img id="loader" src="{{ asset('css/loader.gif') }}" ng-show="loading">
             
 
-            <div id="todasNaves">
+            <div id="todasNaves" class="scroll">
                 <div id="nave" ng-repeat="starship in starships">
                     <h3>@{{starship.name}}</h3>
                     <div>

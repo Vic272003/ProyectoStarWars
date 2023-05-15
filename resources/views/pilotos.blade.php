@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <a class="volver btn btn-warning btn-lg" href="/">Volver</a>
+    <a class="volver btn btn-warning btn-lg" href="/">Inicio</a>
+    <a class="siguiente btn btn-warning btn-lg" href="/naves">Naves</a>
     <div id="pilotos">
         <div ng-controller="pilotCtrl">
 

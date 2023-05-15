@@ -11,9 +11,12 @@ use Tests\TestCase;
 
 class StarShips extends TestCase
 {
-    use DatabaseTransactions;
+    
+    use DatabaseTransactions; //Para que no haga cambios en la base de datos
+    
     /**
-     * A basic feature test example.
+     * Recoge todas las naves TRUE
+     * $response=200
      */
     public function test_example(): void
     {
@@ -22,7 +25,8 @@ class StarShips extends TestCase
         $response->assertStatus(200);
     }
     /**
-     * Intento de devolver las naves con error
+     * Recoge todas las naves FALSE
+     * $response=404
      */
     public function test_example2(): void
     {
@@ -31,7 +35,7 @@ class StarShips extends TestCase
         $response->assertStatus(404);
     }
     /**
-     * Insertar Nave True
+     * Insertar Nave TRUE
      */
     public function test_example4(): void
     {
@@ -60,7 +64,8 @@ class StarShips extends TestCase
         $this->assertEquals('Starship Test', $starship->name);
     }
     /**
-     * Insertar Nave False porque le falta un atributo
+     * Insertar Nave FALSE porque le falta un atributo
+     * $response=Excepción
      */
     public function test_example5(): void
     {
@@ -86,10 +91,12 @@ class StarShips extends TestCase
         ]);
     }
     /**
-     * Actualiza unos campos dándole un id correcto
+     * Actualiza unos campos dándole un id correcto TRUE
+     * $response=200
      */
     public function test_example6(): void
     {
+        //Al existir el id 75 se "hacen" las modificaciones
         $response = $this->json('POST', '/api/updateStarship/75', [
             'name' => 'Gato',
             'model' => 'Updated Starship Model',
@@ -100,10 +107,12 @@ class StarShips extends TestCase
         $response->assertStatus(200);
     }
     /**
-     * Actualiza unos campos dándole un id correcto FALSE
+     * Actualiza unos campos dándole un id incorrecto FALSE
+     * $response=404
      */
     public function test_example7(): void
     {
+        //Al darle el id 1000 que no existe todavía en la base de datos y no encontrarlo, nos salta el error 404
         $response = $this->json('POST', '/api/updateStarship/1000', [
             'name' => 'Updated Starship Name',
             'model' => 'Updated Starship Model',
@@ -115,9 +124,11 @@ class StarShips extends TestCase
     }
     /**
      * Borra un registro TRUE
+     * $response=204
      */
     public function test_example8(): void
     {
+        //Al existir el id 75, lo "borra" de la base de datos
         $response = $this->delete('/api/deleteStarship/75');
 
         $response->assertStatus(204);
@@ -125,9 +136,11 @@ class StarShips extends TestCase
     }
     /**
      * Borra un registro FALSE
+     * $response=404
      */
     public function test_example9(): void
     {
+        //Al no existir el id 1000, nos devuelve el error 404
         $response = $this->delete('/api/deleteStarship/1000');
 
         $response->assertStatus(404);
