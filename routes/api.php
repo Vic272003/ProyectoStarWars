@@ -25,10 +25,8 @@ Route::get('pilotosDeNaves','App\Http\Controllers\controllerStarship@getStarship
 Route::get('pilot','App\Http\Controllers\controllerPilot@getPilot');
 Route::post('addPilotToStarship/{id}', 'App\Http\Controllers\controllerStarship@addPilotToStarship');
 Route::post('deletePilot/{id}','App\Http\Controllers\controllerPilot@deletePilot');
-
 Route::delete('starships/{starship}/pilots/{pilot}','App\Http\Controllers\controllerStarship@deletePilotFromStarship');
-
-//Usados
+//Fin Usados
 
 
 

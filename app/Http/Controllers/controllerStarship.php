@@ -32,6 +32,7 @@ class controllerStarship extends Controller
 
         //Recorremos todas las naves
         foreach ($ships->results as $shipData) {
+            // Atributos de la nave
             $ship = new Starship();
             $ship->id = sacarId($shipData->url);
             $ship->name = $shipData->name;
@@ -50,7 +51,7 @@ class controllerStarship extends Controller
             $ship->created = $shipData->created;
             $ship->edited = $shipData->edited;
             $ship->url = $shipData->url;
-            $ship->save();
+            $ship->save(); //La guardamos
         }
 
         //Esto lo hacemos para pasar de página en la API

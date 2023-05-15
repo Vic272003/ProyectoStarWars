@@ -12,6 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Creamos los atributos de la tabla
         Schema::create('pilot_ship', function (Blueprint $table) {
         $table->id();
         $table->bigInteger('pilot_id');
@@ -20,6 +21,7 @@ return new class extends Migration
 
         
         });
+        //Luego relacionamos sino, da error
         Schema::table('pilot_ship', function (Blueprint $table) {
             $table->foreign('pilot_id')->references('id')->on('pilots')->onDelete('cascade');
             $table->foreign('starship_id')->references('id')->on('starships')->onDelete('cascade');

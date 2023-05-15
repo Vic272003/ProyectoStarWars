@@ -93,10 +93,11 @@
 
             //Función que añade un piloto a una nave
             $scope.addPilotToStarship = function(starshipId, pilotId) {
+                //Variables alertas y gif
                 $scope.loading = true;
-                
                 $scope.aniadePiloto = false;
                 $scope.aniadePilotoFalse = false;
+                //Fin variables alertas y gif
                 $http.post("api/addPilotToStarship/" + starshipId, {
                         pilot_id: pilotId
                     })
@@ -122,23 +123,30 @@
             $scope.priceToBase15 = function(price) {
 
                 var base15 = "";
-                var symbols = "0123456789ßÞ¢μ¶";
+                var symbols = "0123456789ßÞ¢μ¶"; //Símbolos que vamos a usar    
+                //Mientras el precio sea mayor que 0
                 while (price > 0) {
-                    var remainder = price % 15;
-                    base15 = symbols.charAt(remainder) + base15;
-                    price = Math.floor(price / 15);
+                    var remainder = price % 15; //Sacamos el resto de la división
+                    base15 = symbols.charAt(remainder) + base15;    //Sacamos el símbolo que es
+                    price = Math.floor(price / 15);     //Y luego hacemos la división del precio entre 15
                 }
+                //Una vez termine el bucle lo devolvemos
                 return base15;
             };
             $scope.eliminar = function(starshipName, pilotName) {
+                //Variables para las alertas y gif
                 $scope.loading = true;
                 $scope.pilotoBorrar = false;
+                //fin Variables para las alertas
                 // Hacer la llamada DELETE a la API
                 $http({
                     method: 'DELETE',
                     url: '/api/starships/' + starshipName + '/pilots/' + pilotName
                 }).then(function(response) {
+                    //Variable para la alerta
                     $scope.pilotoBorrar = true;
+                    //Fin variable alerta
+                    
                     // Si la eliminación fue exitosa, eliminar el piloto de la lista en la vista
                     // por ejemplo:
                     var starship = $scope.starships.find(function(s) {
