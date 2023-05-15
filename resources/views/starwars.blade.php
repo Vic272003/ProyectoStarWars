@@ -8,13 +8,12 @@
         @import "css/app.css";
         @import "css/icofont/icofont.min.css";
     </style>
-    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
     <h2>
-        Star Wars Rebels
+        Proyect Star Wars
         <span>Podrás consultar nuestras naves y pilotos</span>
     </h2>
 
