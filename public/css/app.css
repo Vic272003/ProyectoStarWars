@@ -264,6 +264,8 @@ div:hover .options {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: rgb(0,0,0);
+    background: linear-gradient(187deg, rgba(0,0,0,0.8711134111847865) 9%, rgba(4,4,4,0.6498248957786239) 26%);
 }
 .bton-eliminar {
     background-color: white;
