@@ -8,7 +8,8 @@
         @import "css/app.css";
         @import "css/icofont/icofont.min.css";
     </style>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,11 +19,11 @@
     </h2>
 
     <div>
-        <a class="inicio mainBtn"><i class="fa fa-rebel"></i></a>
+        <a class="inicio mainBtn"><i class="fa fa-empire"></i></a>
 
         <ul class="options">
             <li class="option option1" >
-                <a class="inicio opt opt1" href="/naves"><i class="fa fa-star"></i></a>
+                <a class="inicio opt opt1" href="/naves"><i class="fa fa-plane"></i></a>
                 <p class="popup">Nuestras naves</p>
             <li>
 

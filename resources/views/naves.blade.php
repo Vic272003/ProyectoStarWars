@@ -30,7 +30,7 @@
                 Se ha intentado meter un piloto que ya está enlazado con la nave, por favor pruebe con otro!
                 <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <img id="loader" src="{{ asset('css/loader.gif') }}" ng-show="loading">
+            <img id="loader" src="{{ asset('css/imperialLoader.gif') }}" ng-show="loading">
 
 
             <div id="todasNaves" class="scroll">
