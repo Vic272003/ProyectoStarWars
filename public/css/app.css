@@ -8,7 +8,7 @@
 }
 body {
     text-align: center;
-    background: #555 url(http://siliconangle.com/files/2011/09/outerspace.jpg)
+    background: #555 url(fondo.jpg)
         top no-repeat;
     background-size: cover;
 }
@@ -176,7 +176,7 @@ div:hover .options {
 }
 
 #todasNaves {
-    height: 600px;
+    height: 550px;
     /* overflow: auto; */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -247,7 +247,7 @@ div:hover .options {
 }
 
 #todosPilotos {
-    height: 600px;
+    height: 550px;
     overflow: auto;
     display: grid;
     grid-template-columns: repeat(5, 1fr);

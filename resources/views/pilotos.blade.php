@@ -30,7 +30,7 @@
                 <div id="piloto" ng-repeat="pilot in pilots">
                     <h3>@{{pilot.name}}</h3>
                     <div>
-                        <p><span>Peso</span>: @{{pilot.height}}</p>
+                        <p><span>Peso</span>: @{{pilot.height}}kg</p>
                         <p><span>Color de pelo</span>: @{{pilot.hair_color}}</p>
                     </div>
                     <div><button class="btn btn-danger" ng-click="eliminarPiloto(pilot.id)">Eliminar</button></div>
