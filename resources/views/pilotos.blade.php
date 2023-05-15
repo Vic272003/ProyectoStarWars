@@ -19,9 +19,9 @@
         <div ng-controller="pilotCtrl">
 
             <h1>Pilotos</h1>
-            <div class="alert alert-success mt-0" role="alert" ng-show="eliminarPiloto">
+            <div class="alert alert-success mt-0" role="alert" ng-if="eliminarPilot">
                 Piloto eliminado correctamente mi pequeño Padawan!
-                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close" ng-click="eliminarPilot = false"></button>
             </div>
             <img id="loader" src="{{ asset('css/loader.gif') }}" ng-show="loading">
 
@@ -52,10 +52,11 @@
             //Función que elimina un piloto tanto de la tabla piloto como sus relaciones
             $scope.eliminarPiloto = function(pilotoId) {
                 $scope.loading = true;
-                $scope.eliminarPiloto = true;
+                $scope.eliminarPilot = false;
                 //Coge el post y lo lleva a esa dirección
                 $http.post("api/deletePilot/" + pilotoId)
                     .then(function(response) {
+                        $scope.eliminarPilot = true;
                         //Cuando entre aquí lista otra vez los pilotos y las naves
                         $http.get("api/pilot")
                             .then(function(response) {

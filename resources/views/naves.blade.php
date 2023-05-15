@@ -19,14 +19,18 @@
         <div ng-controller="starshipCtrl">
 
             <h1>Naves con sus respectivos pilotos y precios</h1>
-            <div class="alert alert-success mt-0" role="alert" ng-show="aniadePiloto">
+            <div class="alert alert-success mt-0" role="alert" ng-if="aniadePiloto">
                 Piloto añadido correctamente mi pequeño Padawan!
-                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close" ng-click="aniadePiloto= false"></button>
             </div>
-            <div class="alert alert-success mt-0" role="alert" ng-show="pilotoBorrar">
+
+            
+            <div class="alert alert-success mt-0" role="alert" ng-if="pilotoBorrar">
+            
                 Piloto borrado de la nave correctamente mi pequeño Padawan!
-                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close" ng-click="pilotoBorrar= false"></button>
             </div>
+
             <div class="alert alert-danger mt-0" role="alert" ng-if="aniadePilotoFalse">
                 Se ha intentado meter un piloto que ya está enlazado con la nave, por favor pruebe con otro!
                 <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close" ng-click="aniadePilotoFalse = false"></button>
@@ -47,6 +51,9 @@
                         </p>
                         <div id="pilotosNave">
                             <p><span>Pilotos<span>:</p>
+                            <ul ng-if="starship.pilots==''">
+                                <li>No hay pilotos en esta nave</li>
+                            </ul>
                             <ul ng-repeat="pilot in starship.pilots">
                                 <li id="modPiloto">@{{pilot.name}}<button type="button" ng-click="eliminar(starship.name,pilot.name)" class="btn-close bton-eliminar"></button></li>
 
@@ -87,17 +94,20 @@
             //Función que añade un piloto a una nave
             $scope.addPilotToStarship = function(starshipId, pilotId) {
                 $scope.loading = true;
-                $scope.aniadePiloto = true;
+                
+                $scope.aniadePiloto = false;
                 $scope.aniadePilotoFalse = false;
                 $http.post("api/addPilotToStarship/" + starshipId, {
                         pilot_id: pilotId
                     })
                     .then(function(response) {
-
+                        //$scope.aniadePiloto = true;
                         // Si la llamada HTTP fue exitosa, actualiza la lista de naves
                         $http.get("api/pilotosDeNaves")
                             .then(function(response) {
                                 $rootScope.starships = response.data;
+
+                                $scope.aniadePiloto = true;
                                 $scope.loading = false;
                             });
                     })
@@ -122,12 +132,13 @@
             };
             $scope.eliminar = function(starshipName, pilotName) {
                 $scope.loading = true;
-                $scope.pilotoBorrar = true;
+                $scope.pilotoBorrar = false;
                 // Hacer la llamada DELETE a la API
                 $http({
                     method: 'DELETE',
                     url: '/api/starships/' + starshipName + '/pilots/' + pilotName
                 }).then(function(response) {
+                    $scope.pilotoBorrar = true;
                     // Si la eliminación fue exitosa, eliminar el piloto de la lista en la vista
                     // por ejemplo:
                     var starship = $scope.starships.find(function(s) {
