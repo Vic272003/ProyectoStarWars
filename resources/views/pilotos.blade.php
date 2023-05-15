@@ -13,21 +13,25 @@
 </head>
 
 <body>
-    <a class="volver btn btn-warning btn-lg" href="/">Inicio</a>
-    <a class="siguiente btn btn-warning btn-lg" href="/naves">Naves</a>
+    <a class="volver btn btn-warning btn-lg" href="/">Inicio<i class="fa fa-home ms-3"></i></a>
+    <a class="siguiente btn btn-warning btn-lg" href="/naves">Naves<i class="fa fa-arrow-right ms-3"></i></a>
     <div id="pilotos">
         <div ng-controller="pilotCtrl">
 
             <h1>Pilotos</h1>
+            <div class="alert alert-success mt-0" role="alert" ng-show="eliminarPiloto">
+                Piloto eliminado correctamente mi pequeño Padawan!
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <img id="loader" src="{{ asset('css/loader.gif') }}" ng-show="loading">
 
 
-            <div id="todosPilotos">
+            <div id="todosPilotos" class="scroll">
                 <div id="piloto" ng-repeat="pilot in pilots">
                     <h3>@{{pilot.name}}</h3>
                     <div>
-                        <p>Peso: @{{pilot.height}}</p>
-                        <p>Color de pelo: @{{pilot.hair_color}}</p>
+                        <p><span>Peso</span>: @{{pilot.height}}</p>
+                        <p><span>Color de pelo</span>: @{{pilot.hair_color}}</p>
                     </div>
                     <div><button class="btn btn-danger" ng-click="eliminarPiloto(pilot.id)">Eliminar</button></div>
                 </div>
@@ -48,6 +52,7 @@
             //Función que elimina un piloto tanto de la tabla piloto como sus relaciones
             $scope.eliminarPiloto = function(pilotoId) {
                 $scope.loading = true;
+                $scope.eliminarPiloto = true;
                 //Coge el post y lo lleva a esa dirección
                 $http.post("api/deletePilot/" + pilotoId)
                     .then(function(response) {

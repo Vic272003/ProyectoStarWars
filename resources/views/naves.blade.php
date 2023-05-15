@@ -9,26 +9,27 @@
         @import "css/app.css";
         @import "css/icofont/icofont.min.css";
     </style>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <a class="volver btn btn-warning btn-lg" href="/">Inicio</a>
-    <a class="siguiente btn btn-warning btn-lg" href="/pilots">Pilotos</a>
+    <a class="volver btn btn-warning btn-lg" href="/">Inicio<i class="fa fa-home ms-3"></i></a>
+    <a class="siguiente btn btn-warning btn-lg" href="/pilots">Pilotos<i class="fa fa-arrow-right ms-3"></i></a>
     <div id="naves">
         <div ng-controller="starshipCtrl">
 
             <h1>Naves con sus respectivos pilotos y precios</h1>
-            <div class="alert alert-success mt-0" role="alert" ng-show="aniadeCliente">
+            <div class="alert alert-success mt-0" role="alert" ng-show="aniadePiloto">
                 Piloto añadido correctamente mi pequeño Padawan!
                 <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="alert alert-success mt-0" role="alert" ng-show="pilotoBorrar">
-                Piloto borrado correctamente mi pequeño Padawan!
+                Piloto borrado de la nave correctamente mi pequeño Padawan!
                 <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="alert alert-danger mt-0" role="alert" ng-show="aniadeClienteFalse">
+            <div class="alert alert-danger mt-0" role="alert" ng-if="aniadePilotoFalse">
                 Se ha intentado meter un piloto que ya está enlazado con la nave, por favor pruebe con otro!
-                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close" ng-click="aniadePilotoFalse = false"></button>
             </div>
             <img id="loader" src="{{ asset('css/imperialLoader.gif') }}" ng-show="loading">
 
@@ -47,7 +48,7 @@
                         <div id="pilotosNave">
                             <p><span>Pilotos<span>:</p>
                             <ul ng-repeat="pilot in starship.pilots">
-                                <li id="modPiloto">@{{pilot.name}}<button type="button" ng-click="eliminar(starship.name,pilot.name)" class="btn-close"></button></li>
+                                <li id="modPiloto">@{{pilot.name}}<button type="button" ng-click="eliminar(starship.name,pilot.name)" class="btn-close bton-eliminar"></button></li>
 
                             </ul>
                         </div>
@@ -75,7 +76,6 @@
             $http.get("api/pilotosDeNaves")
                 .then(function(response) {
                     $rootScope.starships = response.data;
-                    console.log($rootScope.starships);
                 });
             //Hace el get a esa dirección para mostrar los pilotos en el desplegable
             $http.get("api/pilot")
@@ -87,7 +87,8 @@
             //Función que añade un piloto a una nave
             $scope.addPilotToStarship = function(starshipId, pilotId) {
                 $scope.loading = true;
-                $scope.aniadeCliente = true;
+                $scope.aniadePiloto = true;
+                $scope.aniadePilotoFalse = false;
                 $http.post("api/addPilotToStarship/" + starshipId, {
                         pilot_id: pilotId
                     })
@@ -101,11 +102,9 @@
                             });
                     })
                     .catch(function(data, status) {
-                        $scope.aniadeCliente = false;
-                        $scope.aniadeClienteFalse = true;
+                        $scope.aniadePiloto = false;
+                        $scope.aniadePilotoFalse = true;
                         $scope.loading = false;
-                        console.error('Response error', status, data);
-                        
                     })
             };
 

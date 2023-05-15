@@ -215,7 +215,7 @@ div:hover .options {
     flex-direction: column;
     justify-content: space-between;
 }
-.btn-close {
+.bton-eliminar {
     background-color: white;
 }
 #modPiloto {
@@ -253,8 +253,9 @@ div:hover .options {
     width: 90%;
     margin: auto;
 }
-#todosPilotos {
+#todosPilotos h3, #todosPilotos span{
     font-weight: bold;
+    
 }
 #piloto {
     border: 2px solid rgb(214, 214, 20);
@@ -262,7 +263,7 @@ div:hover .options {
     flex-direction: column;
     justify-content: space-between;
 }
-.btn-close {
+.bton-eliminar {
     background-color: white;
 }
 .siguiente{
