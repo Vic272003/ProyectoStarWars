@@ -1,0 +1,250 @@
+#loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100000;
+
+
+}
+body {
+    text-align: center;
+    background: #555 url(http://siliconangle.com/files/2011/09/outerspace.jpg)
+        top no-repeat;
+    background-size: cover;
+}
+
+h2 {
+    font-family: "Arial Black", Gadget, sans-serif;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1em;
+    margin-top: 50px;
+}
+
+h2 span {
+    display: block;
+    font-size: 1.25rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #5283a3;
+}
+
+div {
+    display: inline-block;
+    padding-top: 0.5em;
+}
+
+ul,
+ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.inicio {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    background: #333;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0.5em;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 5px solid #eee;
+    transition: 0.2s;
+    line-height: 0;
+}
+
+.mainBtn {
+    z-index: 3;
+    background: #af1b1b;
+    font-size: 2rem;
+    border: 5px solid #fff;
+    margin-bottom: 0.5em;
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+}
+
+.options {
+    z-index: 0;
+    display: none;
+    /*display: inline-block;*/
+    position: relative;
+    width: 100px;
+    height: 200px;
+    margin-top: 0.5em;
+}
+
+div:hover .mainBtn {
+    background: #f7f7f7;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    color: #555;
+    border-color: #555;
+}
+
+div:hover .options {
+    display: block;
+}
+
+.option {
+    position: relative;
+}
+
+.opt {
+    position: absolute;
+    transition: 0.2s;
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+}
+
+.opt:hover {
+    transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    border-color: #af1b1b;
+    color: #af1b1b;
+    background: #aaa;
+}
+
+.opt1 {
+    top: -1em;
+    left: -1.5em;
+    animation: navmove 0.4s;
+    -moz-animation: navmove 0.4s; /* Firefox */
+    -webkit-animation: navmove 0.4s; /* Safari and Chrome */
+}
+
+.opt3 {
+    top: -1em;
+    right: -1.5em;
+    animation: navmove3 0.5s;
+    -moz-animation: navmove3 0.5s; /* Firefox */
+    -webkit-animation: navmove3 0.5s; /* Safari and Chrome */
+}
+
+@keyframes navmove3 {
+    from {
+        top: -3.5em;
+        right: 0;
+        opacity: 0;
+    }
+    to {
+        top: -1em;
+        right: -1.5em;
+        opacity: 1;
+    }
+}
+@-moz-keyframes navmove3 {
+    from {
+        top: -3.5em;
+        right: 0;
+        opacity: 0;
+    }
+    to {
+        top: -1em;
+        right: -1.5em;
+        opacity: 1;
+    }
+}
+@-webkit-keyframes navmove3 {
+    from {
+        top: -3.5em;
+        right: 0;
+        opacity: 0;
+    }
+    to {
+        top: -1em;
+        right: -1.5em;
+        opacity: 1;
+    }
+}
+
+.popup {
+    display: none;
+}
+
+
+
+/* Naves */
+#naves {
+    color: white;
+}
+
+#todasNaves {
+    height: 600px;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    width: 90%;
+    margin: auto;
+}
+#todasNaves{
+    font-weight: bold;
+}
+#nave {
+    border: 2px solid rgb(214, 214, 20);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.btn-close{
+    background-color: white;
+}
+#modPiloto{
+    display: flex;
+    justify-content: space-between;
+}
+#pilotosNave ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#pilotosNave ul li button{
+    margin-left: 10px;
+}
+.volver{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    font-weight: bold;
+
+}
+
+
+/* Pilotos */
+
+#pilotos {
+    color: white;
+}
+
+#todosPilotos {
+    height: 600px;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    width: 90%;
+    margin: auto;
+}
+#todosPilotos{
+    font-weight: bold;
+}
+#piloto {
+    border: 2px solid rgb(214, 214, 20);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.btn-close{
+    background-color: white;
+}

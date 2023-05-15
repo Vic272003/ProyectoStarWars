@@ -124,6 +124,10 @@ class controllerStarship extends Controller
     {
         return view('starwars');
     }
+    public function returnView($vista)
+    {
+        return view("$vista");
+    }
 
     public function getStarshipsWithPilots()
     {
@@ -145,5 +149,21 @@ class controllerStarship extends Controller
         $starship->pilots()->attach($pilotId);
 
         return response()->json(['message' => 'Piloto agregado a la nave'], 200);
+    }
+    public function deletePilotFromStarship($starship, $pilot)
+    {
+        $starships = Starship::where('name', $starship)->first();
+        if (is_null($starships)) {
+            return response()->json(['message' => 'Nave no encontrada'], 404);
+        }
+
+        $pilots = $starships->pilots()->where('name', $pilot)->first();
+        if (is_null($pilots)) {
+            return response()->json(['message' => 'Piloto no encontrado'], 404);
+        }
+
+        $starships->pilots()->detach($pilots->id);
+
+        return response()->json(['message' => 'Piloto eliminado de la nave'], 200);
     }
 }

@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'App\Http\Controllers\controllerStarship@index');
+Route::get('/naves', function () {
+    return view('naves');
+});
+Route::get('/pilots', function () {
+    return view('pilotos');
+});
 //Route::get('api/prueba', 'App\Http\Controllers\controllerStarship@getStarshipsWithPilots');
 
 

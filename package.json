@@ -10,6 +10,6 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "angular": "^1.8.3"
+        "angular": "^1.8.2"
     }
 }

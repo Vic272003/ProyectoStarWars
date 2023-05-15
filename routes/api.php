@@ -25,13 +25,16 @@ Route::get('pilotosDeNaves','App\Http\Controllers\controllerStarship@getStarship
 Route::get('pilot','App\Http\Controllers\controllerPilot@getPilot');
 Route::post('addPilotToStarship/{id}', 'App\Http\Controllers\controllerStarship@addPilotToStarship');
 Route::post('deletePilot/{id}','App\Http\Controllers\controllerPilot@deletePilot');
+// Route::delete('starships/{starship}/pilots/{pilot}', [StarshipController::class, 'removePilot']);
+Route::delete('starships/{starship}/pilots/{pilot}','App\Http\Controllers\controllerStarship@deletePilotFromStarship');
+
 //Usados
 //Route::get('pilot/{name}','App\Http\Controllers\controllerPilot@showByName');
 
 
 Route::post('addStarship','App\Http\Controllers\controllerStarship@insertStarship');
 Route::post('updateStarship/{id}','App\Http\Controllers\controllerStarship@updateStarship');
-Route::post('deleteStarship/{id}','App\Http\Controllers\controllerStarship@deleteStarship');
+Route::delete('deleteStarship/{id}','App\Http\Controllers\controllerStarship@deleteStarship');
 
 Route::get('starship/{id}/pilots', 'App\Http\Controllers\controllerStarship@getPilotsPorId');
 
