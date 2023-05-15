@@ -203,10 +203,10 @@ div:hover .options {
 .scroll::-webkit-scrollbar-thumb {
     background-color: #D6D614; /* Color del thumb */
     border-radius: 10px; /* Hace más redondo el scrollbar */    
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
-#todasNaves {
+#todasNaves h3,#todasNaves span{
     font-weight: bold;
 }
 #nave {

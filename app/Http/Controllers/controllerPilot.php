@@ -70,6 +70,7 @@ class controllerPilot extends Controller
      */
     public function getPilot()
     {
+        // Devuelve un json con todos los pilotos
         return response()->json(Pilot::all(), 200);
     }
 
@@ -78,10 +79,13 @@ class controllerPilot extends Controller
      */
     public function getPilotId($id)
     {
+        // Buscamos al piloto por su id
         $pilot = Pilot::find($id);
+        // Si es null error 404
         if (is_null($pilot)) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
+        // Si no, json con sus atributos
         return response()->json($pilot::find($id), 200);
     }
     /**
@@ -89,6 +93,7 @@ class controllerPilot extends Controller
      */
     public function showByName($name)
 {
+    // Buscamos al piloto por su nombre
     $pilot = Pilot::where('name', $name)->first();
     return response()->json($pilot);
 }
@@ -98,6 +103,7 @@ class controllerPilot extends Controller
      */
     public function insertPilot(Request $request)
     {
+        // Creamos al piloto
         $pilot = Pilot::create($request->all());
         return response($pilot, 201);
     }
@@ -106,10 +112,13 @@ class controllerPilot extends Controller
      */
     public function updatePilot(Request $request)
     {
+        // Buscamos al piloto por su id
         $pilot = Pilot::find($request->id);
+        // Si es null error 404
         if (is_null($pilot)) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
+        // Si no, hacemos el update
         $pilot->update($request->all());
         return response($pilot, 200);
     }
@@ -118,10 +127,13 @@ class controllerPilot extends Controller
      */
     public function deletePilot($id)
     {
+        // Buscamos al piloto
         $pilot = Pilot::find($id);
+        // Si es null error 404
         if (is_null($pilot)) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
+        // Si no, primero lo borramos de la relación con las naves, y luego lo eliminamos de la base de datos
         $pilot->ships()->detach();
         $pilot->delete();
         return response()->json(['message' => 'Registro eliminado'], 204);

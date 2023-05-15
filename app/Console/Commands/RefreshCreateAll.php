@@ -24,7 +24,7 @@ class RefreshCreateAll extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'comando para eliminar la todo de la base de datos, y luego insertar las naves y pilotos';
 
     /**
      * Execute the console command.
@@ -37,11 +37,11 @@ class RefreshCreateAll extends Command
         //Creamos las naves
         $pilotController = new controllerStarship();
         $pilotController->createStarship();
-        $this->info('Starhips created successfully!');
+        $this->info('Naves creadas correctamente!');
         
         //Creamos los pilotos
         $pilotController = new controllerPilot();
         $pilotController->createPilot();
-        $this->info('Pilots created successfully!');
+        $this->info('Pilotos creados correctamente!');
     }
 }

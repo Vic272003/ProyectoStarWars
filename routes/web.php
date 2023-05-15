@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'App\Http\Controllers\controllerStarship@index');
+//Redirigimos a la vista naves si recogemos esa url
 Route::get('/naves', function () {
     return view('naves');
 });
+//Redirigimos a la vista pilotos si recogemos esa url
 Route::get('/pilots', function () {
     return view('pilotos');
 });
-//Route::get('api/prueba', 'App\Http\Controllers\controllerStarship@getStarshipsWithPilots');
 
 

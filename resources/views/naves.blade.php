@@ -4,11 +4,11 @@
 <head>
     <title>StarWars</title>
     <style>
+        /* Hacemos los import a los ficheros */
         @import "css/bootstrap.min.css";
         @import "css/app.css";
         @import "css/icofont/icofont.min.css";
     </style>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
 </head>
 
 <body>
@@ -18,22 +18,34 @@
         <div ng-controller="starshipCtrl">
 
             <h1>Naves con sus respectivos pilotos y precios</h1>
+            <div class="alert alert-success mt-0" role="alert" ng-show="aniadeCliente">
+                Piloto añadido correctamente mi pequeño Padawan!
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-success mt-0" role="alert" ng-show="pilotoBorrar">
+                Piloto borrado correctamente mi pequeño Padawan!
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger mt-0" role="alert" ng-show="aniadeClienteFalse">
+                Se ha intentado meter un piloto que ya está enlazado con la nave, por favor pruebe con otro!
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <img id="loader" src="{{ asset('css/loader.gif') }}" ng-show="loading">
-            
+
 
             <div id="todasNaves" class="scroll">
                 <div id="nave" ng-repeat="starship in starships">
                     <h3>@{{starship.name}}</h3>
                     <div>
-                        <p>Modelo: @{{starship.model}}</p>
+                        <p><span>Modelo</span>: @{{starship.model}}</p>
                         <p ng-if="starship.cost_in_credits != 'unknown'">
-                            Precio: @{{ priceToBase15(starship.cost_in_credits) }}
+                            <span>Precio</span>: @{{ priceToBase15(starship.cost_in_credits) }}
                         </p>
                         <p ng-if="starship.cost_in_credits == 'unknown'">
-                            Precio: @{{priceToBase15(200)}}
+                            <span>Precio</span>: @{{priceToBase15(200)}}
                         </p>
                         <div id="pilotosNave">
-                            <p>Pilotos:</p>
+                            <p><span>Pilotos<span>:</p>
                             <ul ng-repeat="pilot in starship.pilots">
                                 <li id="modPiloto">@{{pilot.name}}<button type="button" ng-click="eliminar(starship.name,pilot.name)" class="btn-close"></button></li>
 
@@ -54,6 +66,7 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script>
+        //definimos un módulo de AngularJS
         var app = angular.module('myApi', []);
 
         //Controlador de las naves que le pasamos el scope, el http y el rootScope para que el controlador de los pilotos vea la variable starships
@@ -74,6 +87,7 @@
             //Función que añade un piloto a una nave
             $scope.addPilotToStarship = function(starshipId, pilotId) {
                 $scope.loading = true;
+                $scope.aniadeCliente = true;
                 $http.post("api/addPilotToStarship/" + starshipId, {
                         pilot_id: pilotId
                     })
@@ -85,7 +99,14 @@
                                 $rootScope.starships = response.data;
                                 $scope.loading = false;
                             });
-                    });
+                    })
+                    .catch(function(data, status) {
+                        $scope.aniadeCliente = false;
+                        $scope.aniadeClienteFalse = true;
+                        $scope.loading = false;
+                        console.error('Response error', status, data);
+                        
+                    })
             };
 
             //Función que convierte el precio de la nave a base 15
@@ -102,6 +123,7 @@
             };
             $scope.eliminar = function(starshipName, pilotName) {
                 $scope.loading = true;
+                $scope.pilotoBorrar = true;
                 // Hacer la llamada DELETE a la API
                 $http({
                     method: 'DELETE',
@@ -127,9 +149,8 @@
             };
         });
     </script>
-    <!-- <script src="../../public/css/bootstrap.bundle.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    
+
 </body>
 
 </html>

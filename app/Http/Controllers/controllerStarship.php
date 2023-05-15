@@ -65,6 +65,7 @@ class controllerStarship extends Controller
      */
     public function getStarship()
     {
+        // Devolvemos un json con las naves
         return response()->json(Starship::all(), 200);
     }
     /**
@@ -72,10 +73,13 @@ class controllerStarship extends Controller
      */
     public function getStarhipId($id)
     {
+        // Buscamos por su id
         $starship = Starship::find($id);
+        // Si no encuentra la nave
         if (is_null($starship)) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
+        // Devolvemos un json
         return response()->json($starship::find($id), 200);
     }
     /**
@@ -83,6 +87,7 @@ class controllerStarship extends Controller
      */
     public function insertStarship(Request $request)
     {
+        // Creamos la nave
         $starship = Starship::create($request->all());
         return response($starship, 201);
     }
@@ -91,10 +96,13 @@ class controllerStarship extends Controller
      */
     public function updateStarship(Request $request)
     {
+        // Buscamos la nave para ver si existe
         $starship = Starship::find($request->id);
+        // Si es null error 404
         if (is_null($starship)) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
+        // Si recoge algo hacemos el update
         $starship->update($request->all());
         return response($starship, 200);
     }
@@ -103,10 +111,13 @@ class controllerStarship extends Controller
      */
     public function deleteStarship($id)
     {
+        // Buscamos la nave por su id
         $starship = Starship::find($id);
+        // Si no se encuentra error 404
         if (is_null($starship)) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
+        // Si encuentra algo la borramos
         $starship->delete();
         return response()->json(['message' => 'Registro eliminado'], 204);
     }
@@ -115,53 +126,72 @@ class controllerStarship extends Controller
      */
     public function getPilotsPorId($id)
     {
+        // Buscamos la nave por su id
         $starship = Starship::find($id);
+        // Recogemos a los pilotos
         $pilots = $starship->pilots;
         return response()->json($pilots, 200);
     }
-    //En el raiz llamamos a la función index y devuelve la vista starwars
+    /**
+     * En el raiz llamamos a la función index y devuelve la vista starwars
+     */
     public function index()
     {
         return view('starwars');
     }
-    public function returnView($vista)
-    {
-        return view("$vista");
-    }
 
+    /**
+     * Devuelve las naves con los pilotos asociados
+     */
     public function getStarshipsWithPilots()
     {
+        // Recogemos el atributo pilots en el modelo starships
         $starships = Starship::with('pilots')->get();
 
         return response()->json($starships);
     }
+    /**
+     * Añadimos un Piloto a una nave por su id
+     */
     public function addPilotToStarship(Request $request, $id)
     {
+        // Buscamos la nave
         $starship = Starship::find($id);
+
+        // Si es null error 404
         if (is_null($starship)) {
             return response()->json(['message' => 'Nave no encontrada'], 404);
         }
-
+        //Si no recogemos el id del piloto
         $pilotId = $request->input('pilot_id');
+        // Si ya está asociado a la nave error 400
         if ($starship->pilots()->where('pilot_id', $pilotId)->exists()) {
             return response()->json(['message' => 'El piloto ya está asociado a la nave'], 400);
         }
+        //Si no estaba asociado, lo asociamos
         $starship->pilots()->attach($pilotId);
 
         return response()->json(['message' => 'Piloto agregado a la nave'], 200);
     }
+    /**
+     * Borrar un piloto asociado a una nave
+     */
     public function deletePilotFromStarship($starship, $pilot)
     {
+        // Buscamos la nave por su nombre y recogemos la primera que nos encuentre
         $starships = Starship::where('name', $starship)->first();
+        // Si es null error 404
         if (is_null($starships)) {
             return response()->json(['message' => 'Nave no encontrada'], 404);
         }
 
+        //Si no buscamos el nombre del piloto
         $pilots = $starships->pilots()->where('name', $pilot)->first();
+        // Si es null error 404
         if (is_null($pilots)) {
             return response()->json(['message' => 'Piloto no encontrado'], 404);
         }
-
+        // Si no, lo borramos de la relación
         $starships->pilots()->detach($pilots->id);
 
         return response()->json(['message' => 'Piloto eliminado de la nave'], 200);

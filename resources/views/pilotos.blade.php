@@ -4,12 +4,12 @@
 <head>
     <title>StarWars</title>
     <style>
+        /* Hacemos importaciones de los ficheros */
         @import "css/bootstrap.min.css";
         @import "css/app.css";
         @import "css/icofont/icofont.min.css";
     </style>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
 </head>
 
 <body>
